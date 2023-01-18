@@ -18,10 +18,7 @@ function App() {
   const [coinList, setCoinList] = useState([]);
   const [isError, setIsError] = useState(false);
 
-  useEffect(() => {
-    getCoinData();
-  }, []);
-  const getCoinData = async () => {
+  const getCoinData = async (props) => {
     try {
       const response = await axios(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=150&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
@@ -31,6 +28,10 @@ function App() {
       setIsError(true);
     }
   };
+
+  useEffect(() => {
+    getCoinData();
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -44,9 +45,16 @@ function App() {
             <Navbar coinList={coinList} />
             <Switch>
               <Route path="/" exact component={LandingPage} />
-              <Route path="/PortfolioPage" exact component={PortfolioPage} />
-              <Route path="/CoinPage/:coinname" exact component={CoinPage} />
-              <Route path="/Setting" exact component={Setting} />
+              <Route path="/portfoliopage" exact component={PortfolioPage} />
+              {/* <Route
+                path="/portfoliopage"
+                exact
+                component={(routeProps) => (
+                  <PortfolioPage handleCoinList={getCoinData} />
+                )}
+              /> */}
+              <Route path="/coinpage/:coinName" exact component={CoinPage} />
+              <Route path="/setting" exact component={Setting} />
             </Switch>
           </Wrapper>
         </Container>

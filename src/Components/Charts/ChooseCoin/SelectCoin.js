@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Wrapper,
@@ -25,7 +25,9 @@ const NestedCoinList = (props) => {
           <Input />
         </li>
         {props.list.map((item) => (
-          <li onClick={() => props.handleCoin(item)}>{item.name}</li>
+          <li key={item.name} onClick={() => props.handleCoin(item)}>
+            {item.name}
+          </li>
         ))}
       </ul>
     </div>
@@ -35,7 +37,9 @@ const CoinInfoType = (props) => {
   return (
     <ul>
       {props.coinInfo.map((item) => (
-        <li onClick={() => props.handleType(item)}>{item.type}</li>
+        <li key={item.type} onClick={() => props.handleType(item)}>
+          {item.type}
+        </li>
       ))}
     </ul>
   );
@@ -44,9 +48,9 @@ const PeriodSelect = (props) => {
   return (
     <ul>
       {props.periodInfo.map((item) => (
-        <form>
-          <li onClick={() => props.handleDuration(item)}>{item.period}</li>
-        </form>
+        <li key={item.period} onClick={() => props.handlePeriod(item)}>
+          {item.period}
+        </li>
       ))}
     </ul>
   );
@@ -75,32 +79,32 @@ function DisplayChartNavbar(props) {
     { type: "Volume", id: "volume" },
     { type: "Custom", id: "custom" },
   ]);
-  const handleDuration = (item) => {
-    periodInfo.forEach((element, props) => {
+  const handlePeriod = (item) => {
+    setTimeSelect(false);
+    periodInfo.forEach((element) => {
       if (element.id === item.id) {
-        props.alert(element.id);
-        setSelectedCoin(element);
-        setTimeSelect(false);
-      }
-    });
-  };
-  const handleType = (item, props) => {
-    coinInfo.forEach((element) => {
-      if (element.id === item.id) {
-        props.handleType(element);
-        setSelectedType(element);
-        setDataType(false);
+        setSelectedTime(element.period);
+        props.setPeriodState(element.id);
       }
     });
   };
 
-  const handleCoin = (item, props) => {
+  const handleType = (item) => {
+    setDataType(false);
+    coinInfo.forEach((element) => {
+      if (element.id === item.id) {
+        setSelectedType(element.type);
+        props.handleType(element);
+      }
+    });
+  };
+
+  const handleCoin = (item) => {
+    setList(false);
     coinList.forEach((element) => {
       if (element.name === item.name) {
-        props.alert2(element.name);
-        setSelectedCoin(element);
-        setList(false);
-        console.log("props value fo alert2", props.alert2);
+        setSelectedCoin(element.name);
+        props.coinState(element.name);
       }
     });
   };
@@ -110,7 +114,7 @@ function DisplayChartNavbar(props) {
     setTimeSelect(false);
     setDataType(false);
   };
-  const handleTimeSelect = (props) => {
+  const handleTimeSelect = () => {
     setTimeSelect(!timeSelect);
     setList(false);
     setDataType(false);
@@ -120,11 +124,12 @@ function DisplayChartNavbar(props) {
     setTimeSelect(false);
     setList(false);
   };
+
   return (
     <Wrapper>
       <TableNavbar>
         <CoinSelection onClick={handleList}>
-          <Info>{selectedCoin ? selectedCoin.name : "Bitcoin"}</Info>
+          <Info>{selectedCoin !== "" ? selectedCoin : "Bitcoin"}</Info>
           <Styledarrow />
         </CoinSelection>
         <NestedList>
@@ -134,7 +139,7 @@ function DisplayChartNavbar(props) {
       <InnerDiv>
         <Div>
           <CoinDisplayType onClick={handleDatatype}>
-            <Info>{selectedType ? selectedType.type : "Price"}</Info>
+            <Info>{selectedType !== "" ? selectedType : "Price"}</Info>
 
             <Styledarrow />
           </CoinDisplayType>
@@ -146,17 +151,17 @@ function DisplayChartNavbar(props) {
         </Div>
         <TimeDiv>
           <NestedDiv onClick={handleTimeSelect}>
-            <Info>{selectedTime ? selectedTime.period : "1 Year"}</Info>
+            <Info>{selectedTime !== "" ? selectedTime : "1 Year"}</Info>
 
             <Styledarrow />
           </NestedDiv>
           <NestedTimeList>
-            {timeSelect && (
+            {timeSelect ? (
               <PeriodSelect
-                handleDuration={handleDuration}
+                handlePeriod={handlePeriod}
                 periodInfo={periodInfo}
               />
-            )}
+            ) : null}
           </NestedTimeList>
         </TimeDiv>
       </InnerDiv>

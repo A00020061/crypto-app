@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   width: 100%;
@@ -6,6 +7,19 @@ export const Container = styled.div`
   border-radius: 8px;
   ul {
     list-style: none;
+  }
+`;
+
+export const StyleLink = styled(Link)`
+  color: black;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  padding: 3px 0 3px 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  &:hover {
+    background-color: #2c2f36;
+    color: white;
   }
 `;
 
@@ -31,12 +45,4 @@ export const UnorderList = styled.ul`
   background-color: white;
   color: black;
   z-index: 100;
-`;
-export const OrderList = styled.li`
-  padding: 3px 0 3px 1rem;
-  font-family: Arial, Helvetica, sans-serif;
-  &:hover {
-    background-color: #2c2f36;
-    color: white;
-  }
 `;

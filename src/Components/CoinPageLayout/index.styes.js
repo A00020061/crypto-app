@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { AiOutlineLink } from "react-icons/ai";
 import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
 import { ImStack } from "react-icons/im";
 import { BsPlus } from "react-icons/bs";
 
@@ -74,13 +75,13 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  /* border: solid white; */
 
   p {
-    font-size: 13px;
+    font-size: 14px;
     display: flex;
     align-items: center;
-    padding: 2px 0;
-
+    padding: 3.2px 0;
     color: rgba(255, 255, 255, 0.7);
   }
 `;
@@ -94,6 +95,10 @@ export const CoinIconLink = styled(AiOutlineLink)`
   margin-right: 5px;
 `;
 export const StyleArrowDown = styled(IoIosArrowDown)`
+  color: yellow;
+  margin-right: 4px;
+`;
+export const StyleArrowUp = styled(IoIosArrowUp)`
   color: yellow;
   margin-right: 4px;
 `;
@@ -214,10 +219,11 @@ export const ProgressBar = styled.div`
 export const ProgressDiv = styled.div`
   width: 160px;
   height: 7px;
+  margin-top: 0.8rem;
+  margin-left: 0.5rem;
+
   border-radius: 10px;
   background-color: blue;
-  margin-left: -3rem;
-  margin-bottom: 0.6rem;
 `;
 export const NavigationLink = styled.a`
   color: rgba(255, 255, 255, 0.8);

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import CoinChart from "../Charts/charts.js";
 import { connect } from "react-redux";
 import { getCoinName } from "../../services/action/coinNameAction";
@@ -40,13 +39,6 @@ export const LandingPageLayout = ({
   coinPageData,
   ...props
 }) => {
-  const [clickedCoin, setClickedCoin] = useState("");
-
-  const handleSelectedCoin = (item) => {
-    setClickedCoin(item.name);
-    props.selectedCoin(clickedCoin);
-  };
-
   return (
     <>
       <MainWrapper>
@@ -56,8 +48,8 @@ export const LandingPageLayout = ({
             coinValue={coinValue}
             greedValue={greedValue}
             coinList={coinList}
-            alert={props.alert}
-            alert2={props.alert2}
+            setPeriodState={props.setPeriodState}
+            coinState={props.coinState}
           />
         </WrapperContainer>
         <TableDiv>
@@ -100,9 +92,7 @@ export const LandingPageLayout = ({
                           to={`/coinpage/${element.id}`}
                           coinPageData={coinPageData}
                         >
-                          <CoinInfo
-                            onClick={() => handleSelectedCoin({ element })}
-                          >
+                          <CoinInfo>
                             <CoinImage src={element.image} /> {element.name} (
                             {element.symbol.toUpperCase()})
                           </CoinInfo>

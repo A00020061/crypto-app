@@ -31,6 +31,7 @@ import {
   Wrappers,
   AtlData,
   AthData,
+  StyleArrowUp,
 } from "./index.styes";
 
 const ItemList = ({ item, data }) => {
@@ -69,11 +70,16 @@ const CoinPageLayout = ({ data }) => {
             </CoinOfficalLink>
           </Section>
           <Section>
-            <Span>$0.0001256</Span>
+            <Span>${data.market_data?.current_price.usd}</Span>
             <CoinMarketDiv>
               <CoinGrowth>
-                {" "}
-                <StyleArrowDown /> 0.12%
+                {data?.market_data?.price_change_24h > 0 ? (
+                  <StyleArrowUp />
+                ) : (
+                  <StyleArrowDown />
+                )}
+
+                {data?.market_data?.price_change_24h.toFixed(3) + "%"}
               </CoinGrowth>
               <StyleStack />
             </CoinMarketDiv>
@@ -102,28 +108,56 @@ const CoinPageLayout = ({ data }) => {
             <Wrapper>
               <ItemList
                 item="Market Cap"
-                data={data.market_data?.market_cap?.usd}
+                data={
+                  (data.market_data?.market_cap?.usd / 1000000).toFixed(2) + "M"
+                }
               />
               <ItemList
                 item="Fully Diluated Valuation "
-                data={data.market_data?.fully_diluted_valuation?.usd}
+                data={
+                  (
+                    data.market_data?.fully_diluted_valuation?.usd / 1000000
+                  ).toFixed(2) + "M"
+                }
               />
-              <ItemList item="Volume 24h" data="$123456" />
-              <ItemList item="Volume/Market" data="$123456" />
+              <ItemList
+                item="Current Price"
+                data={data.market_data?.current_price.usd}
+              />
+              <ItemList
+                item="Volume/Market"
+                data={(
+                  data.market_data?.total_volume.usd /
+                  data.market_data?.market_cap?.usd
+                ).toFixed(4)}
+              />
               <br />
               <ItemList
                 item="Total Volume"
-                data={data.market_data?.total_volume.usd}
+                data={
+                  (data.market_data?.total_volume.usd / 1000000).toFixed(2) +
+                  "M"
+                }
               />
               <ItemList
                 item="Circulation Supply"
-                data={data.market_data?.circulating_supply}
+                data={
+                  (data.market_data?.circulating_supply / 1000000).toFixed(2) +
+                  "M"
+                }
               />
-              <ItemList item="Max Supply" data={data.market_data?.max_supply} />
+              <ItemList
+                item="Max Supply"
+                data={
+                  data.market_data?.max_supply
+                    ? data.market_data?.max_supply
+                    : 0
+                }
+              />
+              <ProgressDiv>
+                <ProgressBar></ProgressBar>
+              </ProgressDiv>
             </Wrapper>
-            <ProgressDiv>
-              <ProgressBar></ProgressBar>
-            </ProgressDiv>
           </Section>
         </Header>
         <Main>

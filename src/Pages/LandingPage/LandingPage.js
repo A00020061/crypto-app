@@ -15,10 +15,13 @@ function LandingPage() {
   const [page, setPage] = useState(1);
   const [coinList, setCoinList] = useState([]);
 
-  const ParentAlert = (number) => {
+  const setPeriodState = (number) => {
+    console.log("numberand state", number);
     setPeriod(number);
   };
-
+  const setCoinState = (coin) => {
+    setSelectedCoin(coin.toLowerCase());
+  };
   useEffect(() => {
     getCoinData();
     getFearIndex();
@@ -46,9 +49,6 @@ function LandingPage() {
 
   const fetchMoreData = () => {
     setPage(page + 1);
-  };
-  const ParentSelectCoin = (coin) => {
-    setSelectedCoin(coin.toLowerCase());
   };
 
   const getCoinData = async () => {
@@ -97,8 +97,8 @@ function LandingPage() {
           greedValue={greedValue}
           coinLength={coinLength}
           coinList={coinList}
-          alert={ParentAlert}
-          alert2={ParentSelectCoin}
+          setPeriodState={setPeriodState}
+          coinState={setCoinState}
           fetchMoreData={fetchMoreData}
           coinDataLength={coinData}
         />
