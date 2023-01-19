@@ -33,16 +33,7 @@ export const ChartContainer = styled.div`
 
   width: 67%;
 `;
-export const IndicatorContainer = styled.div`
-  padding: 0.5rem 1rem;
-  position: relative;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.6);
 
-  width: 30%;
-  /* border: solid white; */
-
-  font-family: Arial, Helvetica, sans-serif;
-`;
 export const PieInfo = styled.p`
   color: rgba(255, 255, 255, 0.8);
   padding: 12px 11px;
@@ -54,10 +45,9 @@ export const PieInfo = styled.p`
 `;
 export const GreedFigure = styled.div`
   display: flex;
-  position: relative;
   flex-direction: column;
   align-items: center;
-
+  flex-wrap: wrap;
   justify-content: space-between;
   color: rgba(255, 255, 255, 0.9);
   h2 {
@@ -66,9 +56,6 @@ export const GreedFigure = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    @media only screen and (min-width: 1400px) {
-      font-size: 2.5rem;
-    }
   }
 `;
 export const Summary = styled.div`
@@ -99,8 +86,11 @@ export const Wrapper = styled.div`
 `;
 export const Canvas = styled.div`
   margin-top: -3rem;
-
-  @media only screen and (min-width: 1400px) {
-    margin-top: -5rem;
-  }
+`;
+export const IndicatorContainer = styled.div`
+  padding: 0.5rem 1rem;
+  position: relative;
+  box-shadow: 0 0 10px 0 rgba(1, 0, 0, 0.6);
+  width: 30%;
+  font-family: Arial, Helvetica, sans-serif;
 `;

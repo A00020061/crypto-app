@@ -26,11 +26,6 @@ import {
 } from "./index.styles";
 
 const MainNavbar = () => {
-  const [isActive, setisActive] = useState(false);
-  const handleIsActive = () => {
-    setisActive(!isActive);
-  };
-
   return (
     <Container>
       <Div>
@@ -78,13 +73,15 @@ const MainNavbar = () => {
         <Title>Transactions</Title>
       </Div>
       <Div>
-        <StylePortfolio>
-          <BsStar />
-        </StylePortfolio>
-        <Title>Portfolio</Title>
+        <StyledLink to={`/portfoliopage`}>
+          <StylePortfolio>
+            <BsStar />
+          </StylePortfolio>
+          <Title>Portfolio</Title>
+        </StyledLink>
       </Div>
       <Div>
-        <StyledLink to={`/setting`} onClick={handleIsActive}>
+        <StyledLink to={`/setting`}>
           <StyleSetting>
             <IoSettingsOutline />
           </StyleSetting>

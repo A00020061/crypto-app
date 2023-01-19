@@ -28,7 +28,11 @@ function CoinChart(props) {
       <MainContainer>
         <ChartContainer>
           <CoinInfoDiv>
-            <DisplayChartNavbar {...props} handleType={handleType} />
+            <DisplayChartNavbar
+              {...props}
+              setPeriodState={props.setPeriodState}
+              handleType={handleType}
+            />
           </CoinInfoDiv>
           <Div>
             {props.coinValue?.prices && (
