@@ -46,13 +46,6 @@ function App() {
             <Switch>
               <Route path="/" exact component={LandingPage} />
               <Route path="/portfoliopage" exact component={PortfolioPage} />
-              {/* <Route
-                path="/portfoliopage"
-                exact
-                component={(routeProps) => (
-                  <PortfolioPage handleCoinList={getCoinData} />
-                )}
-              /> */}
               <Route path="/coinpage/:coinName" exact component={CoinPage} />
               <Route path="/setting" exact component={Setting} />
             </Switch>

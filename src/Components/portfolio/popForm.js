@@ -54,6 +54,7 @@ function PopCoinForm(props) {
     });
     setIsActive(false);
   };
+
   const handleMoneyChange = (e) => {
     const target = e.target;
     const value = target.value;
@@ -67,15 +68,14 @@ function PopCoinForm(props) {
     e.preventDefault();
   };
 
-  const handleCoinList = (value, amount) => {
-    const item = { value, amount };
+  const handleCoinList = (value, amount, date) => {
+    const item = { value, amount, date };
     props.handleList(item);
   };
   const handleClose = () => {
     if (isEmpty && inputValue === "") {
       props.IsActive();
     } else {
-      alert("Are you sure want to leave the form?");
       props.IsActive();
     }
   };
@@ -84,7 +84,7 @@ function PopCoinForm(props) {
     let value = inputValue;
     let amount = inputMoneyValue;
     if (!isEmpty && inputValue !== "" && inputMoneyValue !== "") {
-      handleCoinList(value, amount);
+      handleCoinList(value, amount, date);
       props.IsActive();
     } else {
       alert("please complete the form first");
